@@ -5,7 +5,7 @@ class scanner:
         self.path ='testing'
         self.file_list = os.listdir(self.path)
         self.move_to = 'testing2'
-        self.file_extention = 'txt'
+        self.file_extention = '.txt'
     def select(self):
         contains = S.filter()
         print(contains)
