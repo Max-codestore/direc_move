@@ -6,12 +6,14 @@ class scanner:
         self.file_list = os.listdir(self.path)
         self.move_to = 'testing2'
         self.file_extention = '.txt'
+        self.repeat = True
     def select(self):
         contains = S.filter()
-        print(contains)
         if len(contains) != 0:
-            file_select = int(input('enter the index of the file you want to move? '))
-            S.movement(contains[file_select])
+            while self.repeat:
+                self.file_list = os.listdir(self.path)
+                contains = S.filter()
+                S.printing(contains)
         else:
             print('there are no files here')
     def movement(self,file):
@@ -24,6 +26,21 @@ class scanner:
             if self.file_extention in self.file_list[i]:
                 contains.append(self.file_list[i])
         return contains
-
+    def printing(self,contains):
+        print('enter the index of the file to move')
+        print('-----------------------------')
+        for i in range(len(contains)):
+            print('{0}:{1}'.format(i,contains[i]))
+        print('E:exit')
+        print('-----------------------------')
+        file = input('')
+        if file.lower() == 'e':
+            self.repeat = False
+            return
+        else:
+            try:
+                S.movement(contains[int(file)])
+            except:
+                print('sorry, something went wrong when attemping to move file number {0}'.format(file))
 S = scanner()
 S.select()
